@@ -1,0 +1,7 @@
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.navbar-brand {
+    transform: skewX(5Deg) skewY(10Deg);
+}
