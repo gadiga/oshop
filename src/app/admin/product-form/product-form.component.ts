@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategoryService } from '../../category.service';
 import { Observable } from 'rxjs/Observable';
 import { ProductService } from '../../product.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -12,21 +14,50 @@ export class ProductFormComponent implements OnInit {
 
   categories$: Observable<any[]>;
   saveStatus;
+  currentProduct = {};
+  prodSub: Subscription;
+  productId;
 
-  constructor(categoryService: CategoryService, private productService: ProductService) {
-    this.categories$ = categoryService.categories;
-   }
+
+  constructor(
+    private categoryService: CategoryService, 
+    private productService: ProductService, 
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.categories$ = this.categoryService.categories;
+    this.productId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.productId) {
+      let productObjservable$ = this.productService.getProduct(this.productId);
+      this.prodSub = productObjservable$.subscribe(p=>{
+        this.currentProduct = p.payload.val();
+        this.prodSub.unsubscribe();
+      });
+    }
+  }
 
   ngOnInit() {
   }
   
   save (product) {
-    console.log(product);
-    this.saveStatus = {status: 'error', message: 'Not saved!!'}
-    this.productService.create(product)
+    this.saveStatus = {status: 'error', message: 'Not saved!!'};
+    let ref: any;
+    if (!this.productId) {
+      ref = this.productService.create(product);
+    } else {
+      ref = this.productService.update( this.productId, product);
+    }
+    
+    ref
     .then(_ => {
-      console.log('successfully saved.....')
       this.saveStatus = {status: 'success', message: 'Saved successfully...'}
+      setTimeout(_=>this.router.navigate(['/admin/products']), 1000);
     });
+  }
+
+  delete() {
+    console.log(`deleting...${this.productId}`);
+    this.productService.delete( this.productId );
+    this.router.navigate(['/admin/products']);
   }
 }

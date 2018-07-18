@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../product.service';
+import { Observable } from '@firebase/util';
 
 @Component({
   selector: 'app-admin-products',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit {
 
-  constructor() { }
+  productList$;
+
+  constructor(private productService: ProductService) {
+    this.productList$ = this.productService.products;
+   }
 
   ngOnInit() {
   }
