@@ -65,7 +65,7 @@
         </div>
   </div>
   <div class="col">
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem;" *ngIf="title.value">
           <img 
           class="card-img-top"
           [src]="currentProduct.imageUrl" 

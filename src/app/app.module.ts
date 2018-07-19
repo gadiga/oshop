@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular5-data-table';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -63,7 +64,8 @@ import { ProductService } from './product.service';
     ]),
     NgbModule.forRoot(),
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    DataTableModule
   ],
   providers: [
     {provide: FirebaseAppConfigToken, useValue: environment.firebase},

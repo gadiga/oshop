@@ -56,7 +56,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   delete() {
-    console.log(`deleting...${this.productId}`);
+    if (!confirm('Are you sure??')) return;
     this.productService.delete( this.productId );
     this.router.navigate(['/admin/products']);
   }
