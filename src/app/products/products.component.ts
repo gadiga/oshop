@@ -3,8 +3,9 @@ import { ProductService } from '../product.service';
 import { Product } from '../models/product.model';
 import { CategoryService } from '../category.service';
 import { Observable } from 'rxjs/Observable';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -13,12 +14,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
 
-  productList$;
+  productList$: Observable<any[]>;
   productList: Product[];
   items: Product[]=[];
   categories$: Observable<any[]>;
   categoryList: {}[] = [];
-  selectedCategory;
+  selectedCategory: string;
 
   constructor(
     private productService: ProductService,
@@ -39,36 +40,26 @@ export class ProductsComponent implements OnInit {
     });
 
     this.productList$ = this.productService.products;
-    let prods=[];   
+    let prods=[];
 
-    // this.productList$.subscribe(prodList=> {
-    //   this.productList = prods;
-    //   let selectCat = this.selectedCategory;
-    //   prodList.forEach(products => {
-    //     let indx = prods.length;
-    //     prods[indx]={};
-    //     prods[indx]['key'] = products.key;
-    //     prods[indx]['title'] = products.payload.val().title;
-    //     prods[indx]['price'] = products.payload.val().price;
-    //     prods[indx]['imageUrl'] = products.payload.val().imageUrl;
-    //     prods[indx]['category'] = products.payload.val().category;
-    //     if (selectCat === prods[indx].category) this.items.push(prods[indx]);
-    //   });
-    // });
-
-    this.productList$.subscribe(prodList=> {
-      this.productList = prods;
-      let selectCat = this.selectedCategory;
-      prodList.forEach(products => {
-        let indx = prods.length;
-        prods[indx]={};
-        prods[indx]['key'] = products.key;
-        prods[indx]['title'] = products.payload.val().title;
-        prods[indx]['price'] = products.payload.val().price;
-        prods[indx]['imageUrl'] = products.payload.val().imageUrl;
-        prods[indx]['category'] = products.payload.val().category;
-        if (selectCat === prods[indx].category) this.items.push(prods[indx]);
-      });
+    let subsc: Subscription = this.productList$.pipe(switchMap(prodList=>{
+        this.productList = prods;
+        let selectCat = this.selectedCategory;
+        prodList.forEach(products => {
+          let indx = prods.length;
+          prods[indx]={};
+          prods[indx]['key'] = products.key;
+          prods[indx]['title'] = products.payload.val().title;
+          prods[indx]['price'] = products.payload.val().price;
+          prods[indx]['imageUrl'] = products.payload.val().imageUrl;
+          prods[indx]['category'] = products.payload.val().category;
+        });
+        return this.activatedRoute.queryParamMap;
+      })
+    ).subscribe(param=>{
+      this.selectedCategory = param.get('category') || null;
+      this.filter(this.selectedCategory);
+      subsc.unsubscribe();
     });
   }
 
@@ -77,9 +68,9 @@ export class ProductsComponent implements OnInit {
   }
   
   filter(query: any) {
-    this.selectedCategory = query ? query.key : null;
+    this.selectedCategory = query ? query : null;
     this.items = query ?
-     this.productList.filter(product=>product.category === query.key):
+     this.productList.filter(product=>product.category === query):
      this.productList;
   }
 

@@ -14,7 +14,7 @@
           routerLink="/" 
           [queryParams]="{category:c.key}"
           class="list-group-item"
-          (click)="filter(c)"
+          (click)="filter(c.key)"
           [ngClass]="{'active':(selectedCategory === c.key)}"
           >
           {{ c.name }} <span *ngIf="selectedCategory === c.key">({{ (items===undefined? 0 : items.length) }})</span>
