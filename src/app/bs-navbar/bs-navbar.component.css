@@ -2,6 +2,17 @@
     cursor: pointer;
 }
 
+@keyframes red-to-yellow {
+    from {background-color: red;}
+    to {background-color: yellow;}
+}
+
 .navbar-brand {
     transform: skewX(5Deg) skewY(10Deg);
+    animation-name: red-to-yellow;
+    animation-iteration-count: infinite;
+    animation-duration: 4s;
+    animation-play-state: running;
+    animation-delay: 1s;
+    animation-direction: alternate;
 }

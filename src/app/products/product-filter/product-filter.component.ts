@@ -16,7 +16,8 @@ export class ProductFilterComponent implements OnInit {
 
 
   constructor(
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService
+  ) {
     this.categories$ = this.categoryService.categories;
     let cats = [];
     this.categories$.subscribe(catList => {
