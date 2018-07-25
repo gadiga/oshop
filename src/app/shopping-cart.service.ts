@@ -19,7 +19,8 @@ export class ShoppingCartService {
     });
   }
 
-  private getCart(cartId: string) {
+  async getCart() {
+    let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
   }
 
@@ -37,17 +38,26 @@ export class ShoppingCartService {
     return this.db.object('/shopping-carts/'+cartId + '/items/' + productId);
   }
 
-  addOrUpdateItem(item$, product: Product) {
+  addOrUpdateItem(item$, product: Product, qty: number) {
     let subsc = item$.snapshotChanges().subscribe(item=> {
       subsc.unsubscribe();
-      item$.set({product: product, quantity: (item ? 1 : item.payload.val().quantity + 1)});
+      if (qty < 0) {
+        let dbQty = item.payload.val().quantity + qty;
+        if (dbQty <= 0){
+          item$.remove();
+          return;
+        }
+      }
+      let dbQty = item.payload.val() ? item.payload.val().quantity + qty : 1;
+      item$.update({product: product, quantity: dbQty});
     });
   }
 
-  async addToCart(product: Product) {
+  async addToCart(product: Product, qty: number) {
     let cartId = await this.getOrCreateCartId();
     let item$ = await this.getItem(cartId, product.key);
-    this.addOrUpdateItem(item$, product);
+    console.log(item$)
+    this.addOrUpdateItem(item$, product, qty);
   }
 }
 

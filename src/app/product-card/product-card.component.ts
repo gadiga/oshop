@@ -9,15 +9,27 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input('product') product;
+  @Input('product') product: Product;
+  @Input('shopping-cart') shoppingCart;
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 
   addToCart(product: Product) {
-    this.shoppingCartService.addToCart(product);
+    this.shoppingCartService.addToCart(product, 1);
+  }
+
+  subFromCart(product: Product) {
+    console.log('sub from cart...')
+    this.shoppingCartService.addToCart(product, -1);
+  }
+
+  getQuantity() {
+    if (this.shoppingCart === undefined) return;
+    let prod = this.shoppingCart[this.product.key];
+    return prod ? prod.quantity : '';
   }
 
 }
