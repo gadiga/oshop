@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from '../product.service';
 import { Product } from '../models/product.model';
 import { Observable } from 'rxjs/Observable';
-import { filter, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ShoppingCartService } from '../shopping-cart.service';
@@ -14,44 +12,27 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  productList$: Observable<any[]>;
-  productList: Product[];
+  productList$: Observable<any>;
+  productList: Product[]=[];
   items: Product[] = [];
   selectedCategory: string;
   shoppingCart;
   shoppingCartSub: Subscription;
 
   constructor(
-    private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private shoppingCartService: ShoppingCartService
   ) {
-    
-    this.productList$ = this.productService.products;
-    let prods = [];
-
-    let subsc: Subscription = this.productList$.pipe(switchMap(prodList => {
-      this.productList = prods;
-      let selectCat = this.selectedCategory;
-      prodList.forEach(products => {
-        let indx = prods.length;
-        prods[indx] = {};
-        prods[indx]['key'] = products.key;
-        prods[indx]['title'] = products.payload.val().title;
-        prods[indx]['price'] = products.payload.val().price;
-        prods[indx]['imageUrl'] = products.payload.val().imageUrl;
-        prods[indx]['category'] = products.payload.val().category;
-      });
-      return this.activatedRoute.queryParamMap;
-    })
-    ).subscribe(param => {
-      this.selectedCategory = param.get('category') || null;
-      this.filter(this.selectedCategory);
-    });
-    
+    this.activatedRoute.data.forEach(data=>this.productList$ = data.data.products);    
   }
 
   async ngOnInit() {
+    (await this.productList$).subscribe((data)=>this.productList.push(data));
+    this.activatedRoute.queryParamMap.subscribe((param: any)=>{
+      this.selectedCategory = param.get('category') || null;
+      this.filter(this.selectedCategory);
+    });
+
     this.shoppingCartSub = (await this.shoppingCartService.getCart())
     .snapshotChanges().subscribe(result=>this.shoppingCart=result.payload.val().items);
   }

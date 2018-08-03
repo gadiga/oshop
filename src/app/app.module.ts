@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule, FirebaseAppConfigToken } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
@@ -31,6 +31,8 @@ import { ProductService } from './product.service';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
+import { ProductsResolve } from './shared/product-resolve.service';
+import { Product } from './models/product.model';
 
 @NgModule({
   declarations: [
@@ -55,8 +57,18 @@ import { ShoppingCartService } from './shopping-cart.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
-      {path:'', component: ProductsComponent},
-      {path:'products', component: ProductsComponent},
+      {
+        path:'', 
+        component: ProductsComponent,
+        resolve: {
+          data: ProductsResolve
+        }
+      },        
+      {
+        path:'products', 
+        component: ProductsComponent,
+        data: {message: 'thisismsg'}
+      },
       {path:'shopping-cart', component: ShoppingCartComponent},
       {path:'login', component: LoginComponent},
       {path:'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
@@ -81,7 +93,8 @@ import { ShoppingCartService } from './shopping-cart.service';
     AdminAuthGuard,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    ProductsResolve
   ],
   bootstrap: [AppComponent]
 })
