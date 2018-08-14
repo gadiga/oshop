@@ -33,6 +33,10 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ProductsResolve } from './shared/product-resolve.service';
 import { Product } from './models/product.model';
+import { ContainerTestComponent, Pane } from './container-test/container-test.component';
+import { ContentTestComponent } from './content-test/content-test.component';
+import { ContentTestSiblingComponent } from './content-test-sibling/content-test-sibling.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,12 @@ import { Product } from './models/product.model';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ContainerTestComponent,
+    ContentTestComponent,
+    Pane,
+    ContentTestSiblingComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

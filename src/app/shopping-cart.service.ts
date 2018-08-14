@@ -56,7 +56,6 @@ export class ShoppingCartService {
   async addToCart(product: Product, qty: number) {
     let cartId = await this.getOrCreateCartId();
     let item$ = await this.getItem(cartId, product.key);
-    console.log(item$)
     this.addOrUpdateItem(item$, product, qty);
   }
 }

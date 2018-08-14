@@ -8,14 +8,12 @@
     <button 
       (click)="addToCart(product)" 
       class="btn btn-secondary btn-block"
-      *ngIf="getQuantity() <= 0"
+      *ngIf="getQuantity() <= 0; else currentCart"
     >
-      Add to Cart  {{ getQuantity() }}
+      Add to Cart
     </button>
-    <div class="btn btn-block" role="group" aria-label="Basic example" *ngIf="getQuantity() > 0">
-        <button type="button" class="btn btn-secondary" (click)="subFromCart(product)">-</button>
-        <button type="button" class="btn">{{ getQuantity() }} in cart</button>
-        <button type="button" class="btn btn-secondary" (click)="addToCart(product)">+</button>
-      </div>
+    <ng-template #currentCart>
+        <product-quantity [product]="product" [shopping-cart]="shoppingCart"></product-quantity>
+    </ng-template>    
   </div>
 </div>
