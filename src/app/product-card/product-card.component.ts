@@ -22,9 +22,9 @@ export class ProductCardComponent implements OnInit {
   }
 
   getQuantity() {
-    if (this.shoppingCart === undefined) return;
+    if (!this.shoppingCart || this.shoppingCart === undefined) return 0;
     let prod = this.shoppingCart[this.product.key];
-    return prod ? prod.quantity : '';
+    return prod ? prod.quantity : 0;
   }
 
 }

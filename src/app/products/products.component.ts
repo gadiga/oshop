@@ -37,7 +37,7 @@ export class ProductsComponent implements DoCheck, OnInit, OnDestroy, OnChanges,
     });
 
     this.shoppingCartSub = (await this.shoppingCartService.getCart())
-    .snapshotChanges().subscribe(result=>this.shoppingCart=result.payload.val().items);
+    .snapshotChanges().subscribe(result=>this.shoppingCart=result.payload.val() ? result.payload.val().items : null);
   }
 
   ngDoCheck () {

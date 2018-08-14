@@ -24,9 +24,19 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   async getShoppingCart () {
     let cart = await (this.shoppingCart.getCart());
     this.cartSubscription = cart.snapshotChanges().subscribe(values=>{
-      this.shoppingCartInstance.getTotalItemCountJson(values.payload.toJSON()["items"]);
-      this.shopCart=values.payload.val().items      
+      this.shoppingCartInstance = new ShoppingCart();      
+      if (values.payload.toJSON()) {
+        this.shoppingCartInstance.getTotalItemCountJson(values.payload.toJSON()["items"]);
+        this.shopCart=values.payload.val().items      
+      }      
     })
+  }
+
+  clearCart () {
+    let confirmation = confirm("Are you sure??");
+    if (confirmation){
+      this.shoppingCart.clearCart();
+    }
   }
 
   ngOnDestroy () {

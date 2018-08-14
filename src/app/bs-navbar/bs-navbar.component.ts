@@ -20,7 +20,7 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authService.appUser$.subscribe(appUser=>this.appUser=appUser);
-    this.shoppingCartInstance = new ShoppingCart();      
+    this.shoppingCartInstance = new ShoppingCart();          
     this.getShoppingCart();
   }
 
@@ -33,6 +33,8 @@ export class BsNavbarComponent implements OnInit, OnDestroy {
   async getShoppingCart () {
     let cart = await (this.shoppingCart.getCart());
     this.cartSubscription = cart.snapshotChanges().subscribe(values=>{
+      this.shoppingCartInstance = new ShoppingCart();          
+      if (values.payload.toJSON())
       this.shoppingCartInstance.getTotalItemCountJson(values.payload.toJSON()["items"]);      
     })
   }

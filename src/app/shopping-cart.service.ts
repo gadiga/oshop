@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ThenableReference } from '@firebase/database-types';
 import { Product } from './models/product.model';
-import { map } from 'rxjs/operators/map';
-import { Observable } from 'rxjs/Observable';
-import { SubjectSubscriber } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +54,14 @@ export class ShoppingCartService {
     let cartId = await this.getOrCreateCartId();
     let item$ = await this.getItem(cartId, product.key);
     this.addOrUpdateItem(item$, product, qty);
+  }
+
+  async clearCart() {
+    let cartId = await this.getOrCreateCartId();
+    let removed$ = this.db.object('/shopping-carts/' + cartId + '/items').remove();
+    removed$.
+    then(result=> console.log("result of removal", result)).
+    catch(error=> console.log('remove error', error))
   }
 }
 
