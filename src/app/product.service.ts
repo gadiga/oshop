@@ -27,7 +27,8 @@ export class ProductService {
 
   get products(): Observable<Product> {
     let productList$ = this.db.list('/products').snapshotChanges();
-    return productList$.pipe(switchMap(prodList => {
+    this.productList = [];
+    let pList = productList$.pipe(switchMap(prodList => {
       prodList.forEach(products => {
         let indx = this.productList.length;
         this.productList[indx] = <Product>{};
@@ -39,6 +40,7 @@ export class ProductService {
       });
       return this.productList;
     }));
+    return pList;
   }
 
   getProduct(id) {

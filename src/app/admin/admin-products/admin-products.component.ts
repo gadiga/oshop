@@ -12,37 +12,33 @@ import { DataTableResource } from 'angular5-data-table';
 export class AdminProductsComponent implements OnInit {
 
   productList$;
-  productList: Product[];
+  productList: Product[]=[];
   tableResource: DataTableResource<Product>;
   items: Product[] = []; // data table items
   itemCount: number;
 
   constructor(private productService: ProductService) {
     this.productList$ = this.productService.products;
-    let prods=[];
-    this.productList$.subscribe(prodList=> {
-      prodList.forEach(products => {
-        let indx = prods.length;
-        prods[indx]={};
-        prods[indx]['key'] = products.key;
-        prods[indx]['title'] = products.payload.val().title;
-        prods[indx]['price'] = products.payload.val().price;
-        prods[indx]['imageUrl'] = products.payload.val().imageUrl;
-        prods[indx]['category'] = products.payload.val().category;
-      });
-      this.items = this.productList = prods;
+   }
 
-      // - data table
-      this.initializeDataTable();
-    });
+   async getProducts () {
+    (await this.productList$).subscribe((data)=>this.productList.push(data));
+    return this.productList;
    }
 
   ngOnInit() {
+    this.getProducts().then(items=>{
+      this.items=items;
+      this.initializeDataTable();
+    });
   }
 
   filter (query: string) {
     this.items = (query) ? 
-    this.productList.filter(product=>product.title.toLowerCase().includes(query.toLowerCase())) :
+    this.productList.filter(product=>{
+      return product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.category.toLowerCase().includes(query.toLowerCase())
+    }) :
     this.productList;
 
     this.initializeDataTable();
