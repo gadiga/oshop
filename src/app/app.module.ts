@@ -5,7 +5,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { DataTableModule } from 'angular5-data-table';
 
@@ -37,6 +37,10 @@ import { ContainerTestComponent, Pane } from './container-test/container-test.co
 import { ContentTestComponent } from './content-test/content-test.component';
 import { ContentTestSiblingComponent } from './content-test-sibling/content-test-sibling.component';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrdersService } from './orders.service';
+import { OrderResolverService } from './shared/order-resolver.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShoppingCartFormComponent } from './shopping-cart-form/shopping-cart-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,9 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ContentTestComponent,
     Pane,
     ContentTestSiblingComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShoppingCartFormComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +87,14 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       {path:'shopping-cart', component: ShoppingCartComponent},
       {path:'login', component: LoginComponent},
       {path:'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
-      {path:'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
+      {
+        path:'order-success', 
+        component: OrderSuccessComponent, 
+        canActivate: [AuthGuard],
+        resolve: {
+          data: OrderResolverService
+        }
+      },
       {path:'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
       {path:'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
       {path:'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
@@ -90,6 +103,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ]),
     NgbModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     CustomFormsModule,
     DataTableModule
   ],
@@ -103,7 +117,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     CategoryService,
     ProductService,
     ShoppingCartService,
-    ProductsResolve
+    ProductsResolve,
+    OrdersService
   ],
   bootstrap: [AppComponent]
 })

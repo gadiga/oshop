@@ -29,15 +29,10 @@ export class ProductsComponent implements DoCheck, OnInit, OnDestroy, OnChanges,
     this.activatedRoute.data.forEach(data=>this.productList$ = data.data.products);    
   }
 
-  async ngOnInit() {
-    (await this.productList$).subscribe((data)=>this.productList.push(data));
-    this.activatedRoute.queryParamMap.subscribe((param: any)=>{
-      this.selectedCategory = param.get('category') || null;
-      this.filter(this.selectedCategory);
-    });
+  ngOnInit() {
+    this.populateProducts();
 
-    this.shoppingCartSub = (await this.shoppingCartService.getCart())
-    .snapshotChanges().subscribe(result=>this.shoppingCart=result.payload.val() ? result.payload.val().items : null);
+    this.populateShoppingCart();
   }
 
   ngDoCheck () {
@@ -65,6 +60,19 @@ export class ProductsComponent implements DoCheck, OnInit, OnDestroy, OnChanges,
 
   ngOnDestroy () {
     this.shoppingCartSub.unsubscribe();
+  }
+
+  async populateProducts () {
+    (await this.productList$).subscribe((data)=>this.productList.push(data));
+    this.activatedRoute.queryParamMap.subscribe((param: any)=>{
+      this.selectedCategory = param.get('category') || null;
+      this.filter(this.selectedCategory);
+    });
+  }
+
+  async populateShoppingCart () {
+    this.shoppingCartSub = (await this.shoppingCartService.getCart())
+    .snapshotChanges().subscribe(result=>this.shoppingCart=result.payload.val() ? result.payload.val().items : null);
   }
 
   filter(query: any) {

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ShoppingCart } from '../models/shopping-cart.model';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,7 +15,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription;
   shopCart;
 
-  constructor(private shoppingCart: ShoppingCartService) { }
+  constructor(private shoppingCart: ShoppingCartService, private router: Router) { }
 
   ngOnInit() {
     this.shoppingCartInstance = new ShoppingCart();      
