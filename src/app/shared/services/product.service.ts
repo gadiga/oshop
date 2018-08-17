@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Product } from './models/product.model';
+import { Product } from '../models/product.model';
 import { switchMap } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
 

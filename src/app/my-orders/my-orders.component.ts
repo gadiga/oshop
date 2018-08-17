@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from '../orders.service';
-import { AuthService } from '../auth.service';
+import { OrdersService } from '../shared/services/orders.service';
+import { AuthService } from '../shared/services/auth.service';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,6 @@ export class MyOrdersComponent implements OnInit {
 
   async initUser () {
     let login = await this.auth.$loginUser;
-    console.log('login', login)
     await login.subscribe(async user=>{
       this.myId = user.uid;
       this.orders$ = await this.orderService.getOrderFromUser(this.myId);
@@ -29,7 +28,6 @@ export class MyOrdersComponent implements OnInit {
 
   ngOnInit() {
     this.orders$.subscribe(orders=>{
-      console.log('orders', orders)
       this.myOrders = orders
       this.myOrders.forEach(order=>{
         let totPrice: number=0;

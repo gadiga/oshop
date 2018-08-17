@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from '../../orders.service';
+import { OrdersService } from '../../../shared/services/orders.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -17,7 +17,6 @@ export class AdminOrdersComponent implements OnInit {
 
   ngOnInit() {
     this.orders$.subscribe(orders=>{
-      console.log('orders', orders)
       this.myOrders = orders
       this.myOrders.forEach(order=>{
         let totPrice: number=0;

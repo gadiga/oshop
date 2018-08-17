@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 import { switchMap } from 'rxjs/operators';
 import { observable } from 'rxjs';
 import 'rxjs/add/observable/of';
-import { AppUser } from './models/app-users.model';
+import { AppUser } from '../models/app-users.model';
 
 @Injectable({
   providedIn: 'root'

@@ -15,7 +15,6 @@ export class OrderSuccessComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
      this.route.data.forEach(details=>{
-       console.log(details.data);
        this.orderId = details.data['order_id'];
        this.details$ = details.data['orderDetails'];
        

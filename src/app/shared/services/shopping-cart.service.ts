@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ThenableReference } from '@firebase/database-types';
-import { Product } from './models/product.model';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Order } from '../models/order.model';
-import { OrdersService } from '../orders.service';
+import { OrdersService } from '../services/orders.service';
 
 @Injectable({
   providedIn: 'root'

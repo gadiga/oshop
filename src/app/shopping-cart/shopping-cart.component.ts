@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ShoppingCartService } from '../shopping-cart.service';
-import { ShoppingCart } from '../models/shopping-cart.model';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import { ShoppingCart } from '../shared/models/shopping-cart.model';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 

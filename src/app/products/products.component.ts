@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, DoCheck, ViewChildren, ContentChildren, QueryList } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product } from '../shared/models/product.model';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ShoppingCartService } from '../shopping-cart.service';
-import { ProductCardComponent } from '../product-card/product-card.component';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 
 @Component({
@@ -36,12 +36,11 @@ export class ProductsComponent implements DoCheck, OnInit, OnDestroy, OnChanges,
   }
 
   ngDoCheck () {
-    console.log("on do check")
-
+    console.log("on do check");
   }
   
   ngOnChanges() {
-    console.log("on changes")
+    console.log("on changes");
   }
 
   ngAfterContentChecked () {

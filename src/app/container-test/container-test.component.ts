@@ -34,14 +34,11 @@ export class ContainerTestComponent implements OnInit, AfterContentChecked, Afte
   }
 
   ngAfterContentChecked () {  
-    console.log('container content checked');
     this.containerChildren.forEach(item=>console.log('contentchecked', item));
   }
 
   ngAfterContentInit () {
-    console.log('container content init');
     this.containerChildren.forEach(item=>console.log('contentinit', item));
-    console.log("child2.............", this.child2.nativeElement ? this.child2.nativeElement.innerHTML: 'nothing here');
   }
 
 }

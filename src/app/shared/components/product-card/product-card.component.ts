@@ -1,17 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../models/product.model';
-import { ShoppingCartService } from '../shopping-cart.service';
+import { Product } from '../../models/product.model';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
-  selector: 'product-quantity',
-  templateUrl: './product-quantity.component.html',
-  styleUrls: ['./product-quantity.component.css']
+  selector: 'product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.css']
 })
-export class ProductQuantityComponent implements OnInit {  
+export class ProductCardComponent implements OnInit {
 
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart;
-  
+
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {    
@@ -19,11 +19,6 @@ export class ProductQuantityComponent implements OnInit {
 
   addToCart(product: Product) {
     this.shoppingCartService.addToCart(product, 1);
-  }
-
-  subFromCart(product: Product) {
-    console.log('sub from cart...')
-    this.shoppingCartService.addToCart(product, -1);
   }
 
   getQuantity() {

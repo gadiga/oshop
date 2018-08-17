@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { AppUser } from '../models/app-users.model';
-import { ShoppingCartService } from '../shopping-cart.service';
+import { AuthService } from '../shared/services/auth.service';
+import { AppUser } from '../shared/models/app-users.model';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
 import { Subscription } from 'rxjs';
-import { ShoppingCart } from '../models/shopping-cart.model';
+import { ShoppingCart } from '../shared/models/shopping-cart.model';
 
 @Component({
   selector: 'bs-navbar',

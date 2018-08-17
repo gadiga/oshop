@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../product.service';
+import { ProductService } from '../../../shared/services/product.service';
 import { Observable } from '@firebase/util';
-import { Product } from '../../models/product.model';
+import { Product } from '../../../shared/models/product.model';
 import { DataTableResource } from 'angular5-data-table';
 
 @Component({
