@@ -13,42 +13,22 @@ import { environment } from '../environments/environment';
 import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { CheckOutComponent } from './check-out/check-out.component';
 import { ContainerTestComponent, Pane } from './container-test/container-test.component';
-import { ContentTestSiblingComponent } from './content-test-sibling/content-test-sibling.component';
 import { ContentTestComponent } from './content-test/content-test.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductsComponent } from './products/products.component';
-import { OrderResolverService } from './shared/resolvers/order-resolver.service';
-import { ProductsResolve } from './shared/resolvers/product-resolve.service';
-import { AuthGuard } from './shared/services/auth-guard.service';
 import { SharedModule } from './shared/shared.module';
-import { ShoppingCartFormComponent } from './shopping-cart-form/shopping-cart-form.component';
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BsNavbarComponent,
     HomeComponent,
-    ProductsComponent,
-    ShoppingCartComponent,
-    CheckOutComponent,
-    OrderSuccessComponent,
-    MyOrdersComponent,
     LoginComponent,
-    ProductFilterComponent,
     ContainerTestComponent,
     ContentTestComponent,
-    Pane,
-    ContentTestSiblingComponent,
-    ShoppingCartSummaryComponent,
-    ShoppingCartFormComponent
+    Pane
   ],
   imports: [
     BrowserModule,
@@ -56,30 +36,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
-      {
-        path:'', 
-        component: ProductsComponent,
-        resolve: {
-          data: ProductsResolve
-        }
-      },        
-      {
-        path:'products', 
-        component: ProductsComponent,
-        data: {message: 'thisismsg'}
-      },
-      {path:'shopping-cart', component: ShoppingCartComponent},
-      {path:'login', component: LoginComponent},
-      {path:'check-out', component: CheckOutComponent, canActivate: [AuthGuard]},
-      {
-        path:'order-success', 
-        component: OrderSuccessComponent, 
-        canActivate: [AuthGuard],
-        resolve: {
-          data: OrderResolverService
-        }
-      },
-      {path:'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]}
+      {path:'login', component: LoginComponent}
     ]),
     NgbModule.forRoot(),
     FormsModule,
@@ -87,7 +44,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     CustomFormsModule,
     DataTableModule,
     SharedModule,
-    AdminModule
+    AdminModule,
+    ShoppingModule
   ],
   providers: [
     {provide: FirebaseAppConfigToken, useValue: environment.firebase},

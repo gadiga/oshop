@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from '../shared/services/orders.service';
-import { AuthService } from '../shared/services/auth.service';
+import { OrdersService } from 'shared/services/orders.service';
+import { AuthService } from 'shared/services/auth.service';
 import { map } from 'rxjs/operators';
 
 @Component({

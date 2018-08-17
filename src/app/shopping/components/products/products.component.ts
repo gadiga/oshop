@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, DoCheck, ViewChildren, ContentChildren, QueryList } from '@angular/core';
-import { Product } from '../shared/models/product.model';
+import { Product } from 'shared/models/product.model';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ShoppingCartService } from '../shared/services/shopping-cart.service';
-import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
+import { ShoppingCartService } from 'shared/services/shopping-cart.service';
+import { ProductCardComponent } from 'shared/components/product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 
 @Component({

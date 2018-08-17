@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrdersService } from '../shared/services/orders.service';
-import { AuthService } from '../shared/services/auth.service';
+import { OrdersService } from 'shared/services/orders.service';
+import { AuthService } from 'shared/services/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ShoppingCart } from '../shared/models/shopping-cart.model';
-import { Order } from '../shared/models/order.model';
+import { ShoppingCart } from 'shared/models/shopping-cart.model';
+import { Order } from 'shared/models/order.model';
 
 @Component({
   selector: 'shopping-cart-form',
