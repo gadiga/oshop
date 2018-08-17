@@ -19,9 +19,6 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
     RouterModule.forRoot([
       {

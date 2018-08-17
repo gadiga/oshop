@@ -34,8 +34,6 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase, 'oshop'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     RouterModule.forRoot([
       {
         path:'', 
@@ -46,11 +44,6 @@ import { CoreModule } from './core/core.module';
       },        
       {path:'login', component: LoginComponent}
     ]),
-    NgbModule.forRoot(),
-    FormsModule,
-    ReactiveFormsModule,
-    CustomFormsModule,
-    DataTableModule,
     SharedModule,
     AdminModule,
     ShoppingModule,

@@ -10,14 +10,11 @@ import { CustomFormsModule } from 'ng2-validation';
 import { AuthGuard } from 'shared/services/auth-guard.service';
 
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { SharedModule } from 'shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CustomFormsModule,
-    DataTableModule,
+    SharedModule,
     RouterModule.forChild([
       {path:'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
       {path:'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},

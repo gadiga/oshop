@@ -10,16 +10,37 @@ import { OrdersService } from 'shared/services/orders.service';
 import { ProductService } from 'shared/services/product.service';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { UserService } from 'shared/services/user.service';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular5-data-table';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    NgbModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
+    DataTableModule    
   ],
   declarations: [
     ProductCardComponent,
     ProductQuantityComponent
   ],
   exports: [
+    CommonModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    NgbModule.forRoot().ngModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
+    DataTableModule,
     ProductCardComponent,
     ProductQuantityComponent
   ],
