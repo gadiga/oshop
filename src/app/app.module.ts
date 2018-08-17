@@ -21,13 +21,12 @@ import { SharedModule } from './shared/shared.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { ProductsComponent } from './shopping/components/products/products.component';
 import { ProductsResolve } from 'shared/resolvers/product-resolve.service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BsNavbarComponent,
-    HomeComponent,
-    LoginComponent,
     ContainerTestComponent,
     ContentTestComponent,
     Pane
@@ -54,7 +53,8 @@ import { ProductsResolve } from 'shared/resolvers/product-resolve.service';
     DataTableModule,
     SharedModule,
     AdminModule,
-    ShoppingModule
+    ShoppingModule,
+    CoreModule
   ],
   providers: [
     {provide: FirebaseAppConfigToken, useValue: environment.firebase},

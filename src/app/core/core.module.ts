@@ -14,26 +14,14 @@ import { AdminModule } from '../admin/admin.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild([
-      {
-        path:'', 
-        component: ProductsComponent,
-        resolve: {
-          data: ProductsResolve
-        }
-      },        
-      {path:'login', component: LoginComponent}
-    ])
+    RouterModule.forChild([])
   ],
   declarations: [
-    BsNavbarComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent    
   ],
   exports: [
-    BsNavbarComponent,
-    HomeComponent,
-    LoginComponent
+    
   ]
 })
 export class CoreModule { }

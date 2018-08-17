@@ -21,8 +21,10 @@ export class MyOrdersComponent implements OnInit {
   async initUser () {
     let login = await this.auth.$loginUser;
     await login.subscribe(async user=>{
-      this.myId = user.uid;
-      this.orders$ = await this.orderService.getOrderFromUser(this.myId);
+      if (user) {
+        this.myId = user.uid;
+        this.orders$ = await this.orderService.getOrderFromUser(this.myId);
+      }      
     });
   }
 
