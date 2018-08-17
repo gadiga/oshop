@@ -12,13 +12,15 @@ import { CustomFormsModule } from 'ng2-validation';
 import { environment } from '../environments/environment';
 import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
+import { BsNavbarComponent } from './core/components/bs-navbar/bs-navbar.component';
 import { ContainerTestComponent, Pane } from './container-test/container-test.component';
 import { ContentTestComponent } from './content-test/content-test.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './core/components/home/home.component';
+import { LoginComponent } from './core/components/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { ShoppingModule } from './shopping/shopping.module';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { ProductsResolve } from 'shared/resolvers/product-resolve.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,13 @@ import { ShoppingModule } from './shopping/shopping.module';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot([
+      {
+        path:'', 
+        component: ProductsComponent,
+        resolve: {
+          data: ProductsResolve
+        }
+      },        
       {path:'login', component: LoginComponent}
     ]),
     NgbModule.forRoot(),

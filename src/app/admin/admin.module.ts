@@ -32,6 +32,11 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
   ],
   providers: [
     AdminAuthGuard
+  ],
+  exports: [
+    ProductFormComponent,
+    AdminProductsComponent,
+    AdminOrdersComponent
   ]
 })
 export class AdminModule { }

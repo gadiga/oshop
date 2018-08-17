@@ -25,13 +25,6 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     SharedModule,
     RouterModule.forRoot([
       {
-        path:'', 
-        component: ProductsComponent,
-        resolve: {
-          data: ProductsResolve
-        }
-      },        
-      {
         path:'products', 
         component: ProductsComponent,
         data: {message: 'thisismsg'}
