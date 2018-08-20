@@ -26,7 +26,6 @@ import { CoreModule } from './core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
-    BsNavbarComponent,
     ContainerTestComponent,
     ContentTestComponent,
     Pane

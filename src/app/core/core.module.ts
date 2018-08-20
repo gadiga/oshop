@@ -8,20 +8,23 @@ import { ProductsComponent } from '../shopping/components/products/products.comp
 import { ProductsResolve } from 'shared/resolvers/product-resolve.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from '../admin/admin.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
+    NgbModule.forRoot()
   ],
   declarations: [
     HomeComponent,
-    LoginComponent    
+    LoginComponent,
+    BsNavbarComponent    
   ],
   exports: [
-    
+    BsNavbarComponent
   ]
 })
 export class CoreModule { }
