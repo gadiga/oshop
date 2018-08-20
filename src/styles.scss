@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+$primary-color: lightgreen;
+$nav-background: rgb(15, 235, 63);
+
+body {
+    padding-top: 100px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    border-style: solid;
+    border-bottom-width: 0.2px;
+    border-color: cornflowerblue;
+    background-size: inherit;
+}
+
+.list-group-item.active {
+    background-color:$primary-color;
+    border-color:$primary-color;
+}
+
+.bg-light {
+    background-color: $nav-background !important;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #1c1c;
+    border-color: #6c757d;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #035003cc;
+    border-color: #6c757d;
+}
