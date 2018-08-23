@@ -9,6 +9,7 @@ import { ProductsResolve } from 'shared/resolvers/product-resolve.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from '../admin/admin.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClockComponent } from './components/clock/clock.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     HomeComponent,
     LoginComponent,
-    BsNavbarComponent    
+    BsNavbarComponent,
+    ClockComponent    
   ],
   exports: [
     BsNavbarComponent
